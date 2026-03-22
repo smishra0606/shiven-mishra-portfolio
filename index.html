@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Developer Command Center | Shiven Mishra</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        amber: {
+                            500: '#FFBF00',
+                            600: '#D49F00',
+                            900: '#6B4600',
+                            950: '#3D2800',
+                        },
+                        charcoal: {
+                            800: '#2E2E2E',
+                            900: '#1A1A1A',
+                            950: '#121212',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        mono: ['Space Mono', 'monospace'],
+                    },
+                }
+            }
+        }
+    </script>
+<style type="text/tailwindcss">
+        :root {
+            --command-bg: #121212;
+            --panel-bg: #1A1A1A;
+            --accent: #FFBF00;
+            --accent-muted: #6B4600;
+            --border: #2E2E2E;
+        }
+        body {
+            background-color: var(--command-bg);
+            color: #d1d5db;
+        }
+        .panel-border {
+            border: 1px solid var(--border);
+        }
+        .code-text {
+            font-family: 'Space Mono', monospace;
+        }
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            min-height: 100vh;
+        }
+        @media (max-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            background-color: var(--accent);
+            box-shadow: 0 0 8px var(--accent);
+        }
+        .terminal-header {
+            background: var(--border);
+            border-radius: 8px 8px 0 0;
+            padding: 8px 12px;
+            display: flex;
+            gap: 6px;
+        }
+        .terminal-dot { width: 10px; height: 10px; border-radius: 50%; }
+        .nav-link {
+            transition: all 0.3s ease;
+        }
+        .nav-link.active {
+            background-color: rgba(26, 26, 26, 0.85);
+            border-color: rgba(255, 191, 0, 0.45);
+            color: #FFBF00;
+            transform: translateX(6px);
+            box-shadow: 0 0 15px rgba(255, 191, 0, 0.2);
+        }
+        .nav-link.active .material-symbols-outlined,
+        .nav-link.active .code-text {
+            color: #FFBF00;
+        }
+    </style>
+</head>
+<body class="font-sans selection:bg-amber-500/30">
+<div class="dashboard-grid">
+<aside class="bg-charcoal-950 border-r border-charcoal-800 flex flex-col p-6 sticky top-0 h-screen hidden lg:flex">
+<div class="mb-10">
+<h1 class="text-xl font-bold text-white tracking-tighter uppercase">Shiven Mishra</h1>
+<p class="text-xs text-charcoal-400 code-text mt-1">Full_Stack_Dev_v2.1</p>
+</div>
+<nav class="flex-grow space-y-2">
+<a class="nav-link flex items-center gap-3 px-4 py-3 rounded border border-transparent text-charcoal-400 hover:bg-charcoal-900 hover:text-white" href="#home">
+<span class="material-symbols-outlined text-sm">terminal</span>
+<span class="text-sm code-text">ROOT_DIR</span>
+</a>
+<a class="nav-link flex items-center gap-3 px-4 py-3 rounded border border-transparent hover:bg-charcoal-900 text-charcoal-400 hover:text-white" href="#skills">
+<span class="material-symbols-outlined text-sm">analytics</span>
+<span class="text-sm code-text">SKILLS_MATRIX</span>
+</a>
+<a class="nav-link flex items-center gap-3 px-4 py-3 rounded border border-transparent hover:bg-charcoal-900 text-charcoal-400 hover:text-white" href="#experience">
+<span class="material-symbols-outlined text-sm">history</span>
+<span class="text-sm code-text">WORK & EXPERIENCE</span>
+</a>
+<a class="nav-link flex items-center gap-3 px-4 py-3 rounded border border-transparent hover:bg-charcoal-900 text-charcoal-400 hover:text-white" href="#projects">
+<span class="material-symbols-outlined text-sm">account_tree</span>
+<span class="text-sm code-text">REPOSITORIES</span>
+</a>
+<a class="nav-link flex items-center gap-3 px-4 py-3 rounded border border-transparent hover:bg-charcoal-900 text-charcoal-400 hover:text-white" href="#certifications">
+<span class="material-symbols-outlined text-sm">workspace_premium</span>
+<span class="text-sm code-text">CERTIFICATIONS</span>
+</a>
+<a class="nav-link flex items-center gap-3 px-4 py-3 rounded border border-transparent hover:bg-charcoal-900 text-charcoal-400 hover:text-white" href="#contact">
+<span class="material-symbols-outlined text-sm">send</span>
+<span class="text-sm code-text">GET_IN_TOUCH</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-charcoal-800">
+<div class="flex items-center gap-2 mb-6">
+<span class="status-dot"></span>
+<span class="text-[10px] code-text text-amber-500">SYSTEMS_OPTIMAL</span>
+</div>
+<div class="space-y-5">
+<div>
+<p class="text-[10px] code-text text-charcoal-500 mb-2 tracking-widest uppercase">DEV_PROFILES</p>
+<div class="flex gap-4">
+<a href="https://leetcode.com/smishra0606" target="_blank" rel="noopener noreferrer" title="LeetCode"><svg class="w-5 h-5 text-charcoal-400 hover:text-amber-500 hover:scale-110 transition-all" fill="currentColor" viewBox="0 0 24 24"><path d="M14.5 3 6.8 10.7a1.8 1.8 0 0 0 0 2.6L14.5 21l1.4-1.4-6.2-6.2h8.8v-2H9.7l6.2-6.2L14.5 3z"></path></svg></a>
+<a href="https://www.hackerrank.com/profile/shivenmishra0606" target="_blank" rel="noopener noreferrer" title="HackerRank"><svg class="w-5 h-5 text-charcoal-400 hover:text-amber-500 hover:scale-110 transition-all" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2 20 6.6v10.8L12 22 4 17.4V6.6L12 2zm-4.5 6v8h2v-3h5v3h2V8h-2v3h-5V8h-2z"></path></svg></a>
+<a href="https://www.geeksforgeeks.org/profile/smishra0606" target="_blank" rel="noopener noreferrer" title="GeeksforGeeks"><svg class="w-5 h-5 text-charcoal-400 hover:text-amber-500 hover:scale-110 transition-all" fill="currentColor" viewBox="0 0 24 24"><path d="M9.2 6.2a5 5 0 1 0 0 11.6l1-1.7a3 3 0 1 1 0-8.2l.9-1.7h-1.9zm5.6 0-.9 1.7a3 3 0 1 1 0 8.2l-1 1.7a5 5 0 1 0 0-11.6h1.9z"></path><path d="M8.5 11h4v2h-4zm3 0h4v2h-4z"></path></svg></a>
+ </div>
+ </div>
+<div>
+<p class="text-[10px] code-text text-charcoal-500 mb-2 tracking-widest uppercase">COMMS_LINK</p>
+<div class="flex gap-4">
+<a href="https://github.com/smishra0606" target="_blank" rel="noopener noreferrer" title="GitHub"><svg class="w-5 h-5 text-charcoal-400 hover:text-amber-500 hover:scale-110 transition-all" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.931 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.372.79 1.102.79 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path></svg></a>
+<a href="https://linkedin.com/in/smishra0606" target="_blank" rel="noopener noreferrer" title="LinkedIn"><svg class="w-5 h-5 text-charcoal-400 hover:text-amber-500 hover:scale-110 transition-all" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg></a>
+<a href="https://instagram.com/smishra0606" target="_blank" rel="noopener noreferrer" title="Instagram"><svg class="w-5 h-5 text-charcoal-400 hover:text-amber-500 hover:scale-110 transition-all" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2h8.5C19.42 2 22 4.58 22 7.75v8.5C22 19.42 19.42 22 16.25 22h-8.5C4.58 22 2 19.42 2 16.25v-8.5C2 4.58 4.58 2 7.75 2zm-.2 2A3.55 3.55 0 0 0 4 7.55v8.9A3.55 3.55 0 0 0 7.55 20h8.9A3.55 3.55 0 0 0 20 16.45v-8.9A3.55 3.55 0 0 0 16.45 4h-8.9zM17.5 5.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"></path></svg></a>
+<a href="https://facebook.com/smishra0606" target="_blank" rel="noopener noreferrer" title="Facebook"><svg class="w-5 h-5 text-charcoal-400 hover:text-amber-500 hover:scale-110 transition-all" fill="currentColor" viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.5-3h-3.2V9.1c0-.86.4-1.7 1.75-1.7H17V4.8S15.8 4.6 14.65 4.6c-2.4 0-3.95 1.45-3.95 4.08V11H8v3h2.7v8h2.8z"></path></svg></a>
+ </div>
+ </div>
+ </div>
+</div>
+</aside>
+<main class="overflow-y-auto overflow-x-hidden p-4 lg:p-8 space-y-8 bg-charcoal-900">
+<div class="lg:hidden flex justify-between items-center mb-6">
+<h1 class="text-lg font-bold text-white uppercase code-text">SM_SYSTEM</h1>
+<button class="text-amber-500"><span class="material-symbols-outlined">menu</span></button>
+</div>
+<section class="grid lg:grid-cols-12 gap-6" id="home">
+<div class="lg:col-span-8 bg-charcoal-950 p-6 rounded-lg panel-border relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-8xl text-amber-500">precision_manufacturing</span>
+</div>
+<div class="text-amber-500 text-xs code-text mb-4">> INITIALIZING_BIOGRAPHY...</div>
+<h2 class="text-3xl md:text-5xl font-bold text-white mb-4 uppercase leading-tight">
+                    Shiven Mishra <br/>
+<span class="text-amber-500">Full Stack Engineer</span>
+</h2>
+<div class="space-y-3 mb-8 max-w-2xl">
+<p class="text-charcoal-400 leading-relaxed italic border-l-2 border-amber-900 pl-4">
+                        "High-performance architect focused on bridging complex backend logic with precision-engineered user interfaces."
+                    </p>
+<ul class="text-sm code-text space-y-2 pt-2">
+<li class="flex items-center gap-2 text-charcoal-300"><span class="text-amber-500">√</span> Scalable microservices development</li>
+<li class="flex items-center gap-2 text-charcoal-300"><span class="text-amber-500">√</span> Real-time data streaming & processing</li>
+<li class="flex items-center gap-2 text-charcoal-300"><span class="text-amber-500">√</span> Pixel-perfect UI deployment</li>
+</ul>
+</div>
+<div class="flex flex-wrap gap-4">
+<a class="bg-amber-600 hover:bg-amber-500 text-charcoal-950 px-6 py-2 rounded text-sm code-text font-bold transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(255,191,0,0.5)]" href="#contact">DEPLOY_HIRE</a>
+<a class="border border-charcoal-700 hover:border-amber-500 text-charcoal-300 px-6 py-2 rounded text-sm code-text font-bold transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(255,191,0,0.5)]" href="https://drive.google.com/file/d/1ykxJQPZAgd4Oi2hhj_-IuMJmzmiE1Zfg/view?usp=drive_link" target="_blank" rel="noopener noreferrer">DOWNLOAD_RESUME.pdf</a>
+</div>
+</div>
+<div class="lg:col-span-4 bg-charcoal-950 rounded-lg panel-border overflow-hidden">
+<div class="p-4 border-b border-charcoal-800 bg-charcoal-900 flex items-center justify-between">
+<span class="text-xs code-text text-charcoal-400">BIOMETRIC_VISUAL</span>
+<div class="flex gap-1">
+<div class="w-2 h-2 rounded-full bg-red-500/50"></div>
+<div class="w-2 h-2 rounded-full bg-amber-500/50"></div>
+<div class="w-2 h-2 rounded-full bg-amber-500/50"></div>
+</div>
+</div>
+<div class="p-4">
+<img alt="Shiven Mishra" class="w-full  brightness-75 hover:grayscale-0 transition-all duration-700 rounded border border-charcoal-800" src="assets/portfolio.jpg"/>
+</div>
+</div>
+</section>
+<section class="bg-charcoal-950 rounded-lg panel-border p-6" id="skills">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h3 class="text-xl font-bold text-white uppercase tracking-wider">Skills_Matrix</h3>
+<p class="text-xs code-text text-amber-500 mt-1">Core_Competency_Analysis.exe</p>
+</div>
+<span class="material-symbols-outlined text-amber-500/30 text-4xl">grid_view</span>
+</div>
+<div class="flex items-center justify-between mb-6">
+<span class="text-xs code-text text-charcoal-500">Displaying (03) Modules</span>
+</div>
+<div class="grid md:grid-cols-3 gap-6">
+<div class="bg-charcoal-900 rounded-lg panel-border group hover:border-amber-500/50 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(255,191,0,0.5)] p-5">
+<div class="flex flex-wrap gap-2 mb-3">
+<span class="text-[9px] code-text bg-amber-950 text-amber-500 px-2 py-0.5 rounded border border-amber-500/20">LANGUAGES</span>
+<span class="text-[9px] code-text bg-amber-950 text-amber-500 px-2 py-0.5 rounded border border-amber-500/20">CORE</span>
+</div>
+<h4 class="text-white font-bold mb-2">Programming Core</h4>
+<p class="text-xs text-charcoal-400 mb-4">Java, C++, Python, JavaScript, PHP, and SQL focused on scalable full-stack builds.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 text-[10px] code-text bg-charcoal-950 text-amber-500 rounded border border-amber-500/25">Java</span>
+<span class="px-2 py-1 text-[10px] code-text bg-charcoal-950 text-amber-500 rounded border border-amber-500/25">Python</span>
+<span class="px-2 py-1 text-[10px] code-text bg-charcoal-950 text-amber-500 rounded border border-amber-500/25">JavaScript</span>
+</div>
+</div>
+
+<div class="bg-charcoal-900 rounded-lg panel-border group hover:border-amber-500/50 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(255,191,0,0.5)] p-5">
+<div class="flex flex-wrap gap-2 mb-3">
+<span class="text-[9px] code-text bg-amber-950 text-amber-500 px-2 py-0.5 rounded border border-amber-500/20">FULL STACK</span>
+<span class="text-[9px] code-text bg-amber-950 text-amber-500 px-2 py-0.5 rounded border border-amber-500/20">WEB</span>
+</div>
+<h4 class="text-white font-bold mb-2">Web & Backend Stack</h4>
+<p class="text-xs text-charcoal-400 mb-4">HTML5, CSS3, Tailwind, React, Node.js, Express.js, and production-ready architecture workflows.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 text-[10px] code-text bg-charcoal-950 text-amber-500 rounded border border-amber-500/25">React.js</span>
+<span class="px-2 py-1 text-[10px] code-text bg-charcoal-950 text-amber-500 rounded border border-amber-500/25">Node.js</span>
+<span class="px-2 py-1 text-[10px] code-text bg-charcoal-950 text-amber-500 rounded border border-amber-500/25">Express</span>
+</div>
+</div>
+
+<div class="bg-charcoal-900 rounded-lg panel-border group hover:border-amber-500/50 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(255,191,0,0.5)] p-5">
+<div class="flex flex-wrap gap-2 mb-3">
+<span class="text-[9px] code-text bg-amber-950 text-amber-500 px-2 py-0.5 rounded border border-amber-500/20">TOOLS</span>
+<span class="text-[9px] code-text bg-amber-950 text-amber-500 px-2 py-0.5 rounded border border-amber-500/20">PLATFORMS</span>
+</div>
+<h4 class="text-white font-bold mb-2">Engineering Toolkit</h4>
+<p class="text-xs text-charcoal-400 mb-4">GitHub workflow, cloud deployment, MongoDB/MySQL data handling, and modern dev platforms.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 text-[10px] code-text bg-charcoal-950 text-amber-500 rounded border border-amber-500/25">Git</span>
+<span class="px-2 py-1 text-[10px] code-text bg-charcoal-950 text-amber-500 rounded border border-amber-500/25">MongoDB</span>
+<span class="px-2 py-1 text-[10px] code-text bg-charcoal-950 text-amber-500 rounded border border-amber-500/25">Netlify</span>
+</div>
+</div>
+</div>
+<div class="text-center pt-4">
+<a class="inline-block px-8 py-3 bg-charcoal-950 border border-charcoal-800 text-charcoal-300 rounded text-xs code-text hover:border-amber-500 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(255,191,0,0.5)] uppercase tracking-widest" href="skills.html">[ VIEW_ALL_SKILLS ]</a>
+</div>
+</section>
+<div class="grid lg:grid-cols-2 gap-6">
+<section class="bg-charcoal-950 rounded-lg panel-border flex flex-col" id="experience">
+<div class="p-4 bg-charcoal-900 border-b border-charcoal-800 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-amber-500">list_alt</span>
+<span class="text-xs font-bold code-text uppercase">Operational_History</span>
+</div>
+<div class="p-6 space-y-8 flex-grow">
+<div class="relative pl-6 border-l border-amber-900">
+<div class="absolute w-2 h-2 bg-amber-500 rounded-full -left-[4.5px] top-1 shadow-[0_0_5px_#FFBF00]"></div>
+<div class="text-[10px] code-text text-amber-500 mb-1">2026</div>
+<h4 class="text-white font-bold text-sm">Freelance Full Stack Developer</h4>
+<p class="text-xs text-charcoal-400 mb-2">Code Teza LMS</p>
+<ul class="text-xs text-charcoal-300 space-y-2 leading-relaxed">
+<li class="flex items-start gap-2"><span class="text-amber-500 mt-0.5">»</span> Built and delivered a full-scale Learning Management System on the MERN stack, owning architecture, module planning, development, testing, and production deployment across Netlify and Render with secure CI-ready environment configuration.</li>
+<li class="flex items-start gap-2"><span class="text-amber-500 mt-0.5">»</span> Designed a robust JWT + Bcrypt authentication and authorization flow with role-based access control for Students, Mentors, and SuperAdmins, ensuring strict endpoint protection and secure session handling across user journeys.</li>
+<li class="flex items-start gap-2"><span class="text-amber-500 mt-0.5">»</span> Implemented scalable data and media workflows by integrating MongoDB Atlas for persistent cloud storage and Cloudinary for optimized asset management, improving reliability under concurrent classroom usage scenarios.</li>
+<li class="flex items-start gap-2"><span class="text-amber-500 mt-0.5">»</span> Optimized frontend responsiveness and dashboard usability for multi-device access, delivering a clean, production-grade interface for institutional deployments and long-session learning operations.</li>
+</ul>
+</div>
+<div class="relative pl-6 border-l border-charcoal-800">
+<div class="absolute w-2 h-2 bg-charcoal-700 rounded-full -left-[4.5px] top-1"></div>
+<div class="text-[10px] code-text text-charcoal-500 mb-1">2025 INTERN</div>
+<h4 class="text-white font-bold text-sm">Full Stack Developer Intern</h4>
+<p class="text-xs text-charcoal-400 mb-2">DSPL Technologies</p>
+<ul class="text-xs text-charcoal-300 space-y-2 leading-relaxed">
+<li class="flex items-start gap-2"><span class="text-amber-500 mt-0.5">»</span> Directed the end-to-end modernization of the company website from a legacy implementation to a structured MERN-based platform, improving maintainability, component reuse, and long-term feature scalability.</li>
+<li class="flex items-start gap-2"><span class="text-amber-500 mt-0.5">»</span> Diagnosed and fixed high-impact issues across frontend and backend layers, enhancing runtime stability, reducing UI inconsistencies, and improving performance across common user flows.</li>
+<li class="flex items-start gap-2"><span class="text-amber-500 mt-0.5">»</span> Collaborated on deployment hardening and QA validation to deliver a polished production release with consistent cross-browser behavior and fully responsive layouts for desktop, tablet, and mobile.</li>
+<li class="flex items-start gap-2"><span class="text-amber-500 mt-0.5">»</span> Contributed to cleaner development workflows with improved code organization, modular structure, and maintainable UI patterns aligned with professional delivery standards.</li>
+</ul>
+</div>
+<div class="pt-2">
+<a class="inline-flex items-center justify-center px-6 py-3 rounded border border-amber-500/50 bg-amber-900/10 text-amber-500 text-xs code-text tracking-[0.18em] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_0_15px_#FFBF00] hover:bg-amber-900/20" href="experience.html">[ VIEW_FULL_TIMELINE ]</a>
+</div>
+</div>
+</section>
+<div class="space-y-6">
+<section class="bg-charcoal-950 rounded-lg panel-border overflow-hidden">
+<div class="p-4 bg-charcoal-900 border-b border-charcoal-800 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-amber-500">school</span>
+<span class="text-xs font-bold code-text uppercase">Academic_Certificates</span>
+</div>
+<div class="p-6 space-y-4">
+<div class="p-4 bg-charcoal-900 rounded border-l-2 border-amber-500">
+<div class="text-[10px] code-text text-charcoal-500 uppercase">B.Tech in Computer Science</div>
+<div class="text-sm font-bold text-white">Lovely Professional University</div>
+<div class="text-[10px] code-text text-amber-500 mt-1">CLASS OF 2027</div>
+</div>
+<div class="p-4 bg-charcoal-900 rounded border-l-2 border-charcoal-800">
+<div class="text-[10px] code-text text-charcoal-500 uppercase">Class XII (Science)</div>
+<div class="text-sm font-bold text-white">Kendriya Vidyalaya</div>
+<div class="text-[10px] code-text text-charcoal-500 mt-1">COMPLETED 2023</div>
+</div>
+<div class="p-4 bg-charcoal-900 rounded border-l-2 border-charcoal-800">
+<div class="text-[10px] code-text text-charcoal-500 uppercase">Class X (Science)</div>
+<div class="text-sm font-bold text-white">Kendriya Vidyalaya</div>
+<div class="text-[10px] code-text text-charcoal-500 mt-1">COMPLETED 2021</div>
+</div>
+</section>
+<section class="bg-charcoal-950 rounded-lg panel-border overflow-hidden">
+<div class="p-4 bg-charcoal-900 border-b border-charcoal-800 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-amber-500">workspace_premium</span>
+<span class="text-xs font-bold code-text uppercase">System_Achievements</span>
+</div>
+<div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="p-4 border border-amber-900/30 bg-amber-900/10 rounded hover:border-amber-500/50 transition-all group hover:-translate-y-1 hover:shadow-[0_0_16px_rgba(255,191,0,0.3)]">
+<div class="text-amber-500 font-bold text-xl code-text mb-2 uppercase">200+ DSA_PROBS_SOLVED</div>
+<div class="text-xs text-charcoal-400 leading-relaxed">Resolved 200+ computational problems across <a class="transition-all duration-200 hover:text-amber-500 hover:drop-shadow-[0_0_6px_rgba(255,191,0,0.8)]" href="https://leetcode.com/smishra0606" target="_blank" rel="noopener noreferrer" title="LeetCode">LeetCode</a>, <a class="transition-all duration-200 hover:text-amber-500 hover:drop-shadow-[0_0_6px_rgba(255,191,0,0.8)]" href="https://www.geeksforgeeks.org/profile/smishra0606" target="_blank" rel="noopener noreferrer" title="GeeksForGeeks">GeeksForGeeks</a>, and HackerRank, sharpening logic-building and code optimization skills.</div>
+</div>
+<div class="p-4 border border-amber-900/30 bg-amber-900/10 rounded hover:border-amber-500/50 transition-all group hover:-translate-y-1 hover:shadow-[0_0_16px_rgba(255,191,0,0.3)]">
+<div class="text-amber-500 font-bold text-xl code-text mb-2 uppercase">HACKATHON_CAPTAIN</div>
+<div class="text-xs text-charcoal-400 leading-relaxed">Led team-based coding initiatives in high-pressure environments, demonstrating strategic thinking and rapid problem-solving.</div>
+</div>
+<div class="p-4 border border-amber-900/30 bg-amber-900/10 rounded hover:border-amber-500/50 transition-all group hover:-translate-y-1 hover:shadow-[0_0_16px_rgba(255,191,0,0.3)]">
+<div class="text-amber-500 font-bold text-xl code-text mb-2 uppercase">OPEN_CONTRIBUTOR</div>
+<div class="text-xs text-charcoal-400 leading-relaxed">Actively maintaining 'Algo-Vault' &amp; 'Logic-Lab' repositories on GitHub, fostering community learning and sharing robust C++/Java solutions.</div>
+</div>
+<div class="p-4 border border-amber-900/30 bg-amber-900/10 rounded hover:border-amber-500/50 transition-all group hover:-translate-y-1 hover:shadow-[0_0_16px_rgba(255,191,0,0.3)]">
+<div class="text-amber-500 font-bold text-xl code-text mb-2 uppercase">TECH_MENTORSHIP (Soft Skill)</div>
+<div class="text-xs text-charcoal-400 leading-relaxed">Guided peers in full-stack development, demonstrating a solution-oriented approach, high discipline, and fostering a growth mindset within teams.</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+<section class="space-y-6" id="projects">
+<div class="flex items-center justify-between">
+<h3 class="text-xl font-bold text-white uppercase tracking-wider">Project_Repositories</h3>
+<span class="text-xs code-text text-charcoal-500">Displaying (03) Active Nodes</span>
+</div>
+<div class="grid md:grid-cols-3 gap-6">
+
+<div class="bg-charcoal-950 rounded-lg panel-border group hover:border-amber-500/50 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(255,191,0,0.5)]">
+<div class="h-40 bg-charcoal-800 relative overflow-hidden">
+<img alt="Java Pac-Man" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-all" src="assets/DSPL.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 to-transparent"></div>
+</div>
+<div class="p-5">
+<div class="flex flex-wrap gap-2 mb-3">
+<span class="text-[9px] code-text bg-amber-950 text-amber-500 px-2 py-0.5 rounded border border-amber-500/20">MERN</span>
+<span class="text-[9px] code-text bg-amber-950 text-amber-500 px-2 py-0.5 rounded border border-amber-500/20">CLIENT PROJECT</span>
+</div>
+<h4 class="text-white font-bold mb-2">DSPL_Technology_WEB</h4>
+<p class="text-xs text-charcoal-400 mb-6">DSPL is a creative technology agency that specializes in crafting innovative digital solutions.</p>
+<div class="flex gap-4">
+<a class="text-charcoal-400 hover:text-amber-500 transition-colors" href="https://github.com/smishra0606/Data-Software-Pvt.-Ltd.-Web" target="_blank" rel="noopener noreferrer" title="GitHub Repo"><span class="material-symbols-outlined text-lg">code</span></a>
+<a class="text-charcoal-400 hover:text-amber-500 transition-colors" href="https://datasoftwarepvtltd.com" target="_blank" rel="noopener noreferrer" title="Live Demo"><span class="material-symbols-outlined text-lg">open_in_new</span></a>
+</div>
+</div>
+</div>
+
+<div class="bg-charcoal-950 rounded-lg panel-border group hover:border-amber-500/50 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(255,191,0,0.5)]">
+<div class="h-40 bg-charcoal-800 relative overflow-hidden">
+<img alt="CodeTexa LMS" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-all" src="assets/CodeTexa.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 to-transparent"></div>
+</div>
+<div class="p-5">
+<div class="flex flex-wrap gap-2 mb-3">
+<span class="text-[9px] code-text bg-amber-950 text-amber-500 px-2 py-0.5 rounded border border-amber-500/20">MERN</span>
+<span class="text-[9px] code-text bg-amber-950 text-amber-500 px-2 py-0.5 rounded border border-amber-500/20">CLIENT PROJECT</span>
+</div>
+<h4 class="text-white font-bold mb-2">CodeTexa LMS</h4>
+<p class="text-xs text-charcoal-400 mb-6">Learning Management System with role-specific dashboards and cloud media handling.</p>
+<div class="flex gap-4">
+<a class="text-charcoal-400 hover:text-amber-500 transition-colors" href="https://github.com/smishra0606/CodeTexa_Backend" target="_blank" rel="noopener noreferrer" title="GitHub Repo"><span class="material-symbols-outlined text-lg">code</span></a>
+<a class="text-charcoal-400 hover:text-amber-500 transition-colors" href="https://codetexa.com" target="_blank" rel="noopener noreferrer" title="Live Demo"><span class="material-symbols-outlined text-lg">open_in_new</span></a>
+</div>
+</div>
+</div>
+
+<div class="bg-charcoal-950 rounded-lg panel-border group hover:border-amber-500/50 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(255,191,0,0.5)]">
+<div class="h-40 bg-charcoal-800 relative overflow-hidden">
+<img alt="CodeTexa LMS" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-all" src="assets/ayodhya-estate.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 to-transparent"></div>
+</div>
+<div class="p-5">
+<div class="flex flex-wrap gap-2 mb-3">
+<span class="text-[9px] code-text bg-amber-950 text-amber-500 px-2 py-0.5 rounded border border-amber-500/20">MERN</span>
+<span class="text-[9px] code-text bg-amber-950 text-amber-500 px-2 py-0.5 rounded border border-amber-500/20">CLIENT PROJECT</span>
+</div>
+<h4 class="text-white font-bold mb-2">Ayodhya Estates</h4>
+<p class="text-xs text-charcoal-400 mb-6">Real estate management platform with property listings and virtual tours.</p>
+<div class="flex gap-4">
+<a class="text-charcoal-400 hover:text-amber-500 transition-colors" href="https://github.com/smishra0606/ayodhya-estates-web" target="_blank" rel="noopener noreferrer" title="GitHub Repo"><span class="material-symbols-outlined text-lg">code</span></a>
+<a class="text-charcoal-400 hover:text-amber-500 transition-colors" href="https://ayodhyaestate.com" target="_blank" rel="noopener noreferrer" title="Live Demo"><span class="material-symbols-outlined text-lg">open_in_new</span></a>
+</div>
+</div>
+</div>
+
+</div>
+<div class="text-center pt-4">
+<a class="inline-block px-8 py-3 bg-charcoal-950 border border-charcoal-800 text-charcoal-300 rounded text-xs code-text hover:border-amber-500 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(255,191,0,0.5)] uppercase tracking-widest" href="projects.html">[ VIEW_ALL_PROJECTS ]</a>
+</div>
+</section>
+
+<section class="space-y-6" id="certifications">
+<div class="flex items-center justify-between">
+<h3 class="text-xl font-bold text-white uppercase tracking-wider">Verified_Certifications</h3>
+<span class="text-xs code-text text-charcoal-500">Displaying (03) Modules</span>
+</div>
+<div class="grid md:grid-cols-3 gap-6">
+
+<div class="bg-charcoal-950 rounded-lg panel-border group hover:border-amber-500/50 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(255,191,0,0.5)]">
+<div class="h-36 bg-charcoal-800 relative overflow-hidden">
+<img alt="Database Structures and Management with MySQL" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-all" src="assets/meta-mysql.jpg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 to-transparent"></div>
+</div>
+<div class="p-5">
+<div class="flex flex-wrap gap-2 mb-3">
+<span class="text-[9px] code-text bg-amber-950 text-amber-500 px-2 py-0.5 rounded border border-amber-500/20">META</span>
+<span class="text-[9px] code-text bg-amber-950 text-amber-500 px-2 py-0.5 rounded border border-amber-500/20">MYSQL</span>
+</div>
+<h4 class="text-white font-bold mb-1">Database Structures and Management with MySQL</h4>
+<p class="text-xs text-charcoal-400 mb-4">Meta (Coursera)</p>
+<a class="inline-flex items-center gap-2 px-4 py-2 rounded border border-amber-500/40 bg-amber-900/10 text-amber-500 text-[10px] code-text uppercase tracking-wider transition-all duration-300 ease-out hover:bg-amber-500 hover:text-charcoal-950 hover:shadow-[0_0_12px_#FFBF00]" href="https://coursera.org/verify/TWCVBEYWURN6">Verify Certificate <span class="material-symbols-outlined text-sm">open_in_new</span></a>
+</div>
+</div>
+
+<div class="bg-charcoal-950 rounded-lg panel-border group hover:border-amber-500/50 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(255,191,0,0.5)]">
+<div class="h-36 bg-charcoal-800 relative overflow-hidden">
+<img alt="Responsive Web Design" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-all" src="assets/fcc-responsive-web.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 to-transparent"></div>
+</div>
+<div class="p-5">
+<div class="flex flex-wrap gap-2 mb-3">
+<span class="text-[9px] code-text bg-amber-950 text-amber-500 px-2 py-0.5 rounded border border-amber-500/20">WEB DEV</span>
+<span class="text-[9px] code-text bg-amber-950 text-amber-500 px-2 py-0.5 rounded border border-amber-500/20">HTML/CSS</span>
+</div>
+<h4 class="text-white font-bold mb-1">Responsive Web Design</h4>
+<p class="text-xs text-charcoal-400 mb-4">freeCodeCamp</p>
+<a class="inline-flex items-center gap-2 px-4 py-2 rounded border border-amber-500/40 bg-amber-900/10 text-amber-500 text-[10px] code-text uppercase tracking-wider transition-all duration-300 ease-out hover:bg-amber-500 hover:text-charcoal-950 hover:shadow-[0_0_12px_#FFBF00]" href="https://www.freecodecamp.org/certification/smishra0606/responsive-web-design">Verify Certificate <span class="material-symbols-outlined text-sm">open_in_new</span></a>
+</div>
+</div>
+
+<div class="bg-charcoal-950 rounded-lg panel-border group hover:border-amber-500/50 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(255,191,0,0.5)]">
+<div class="h-36 bg-charcoal-800 relative overflow-hidden">
+<img alt="Data Structures and Algorithm" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-all" src="assets/lpu-dsa.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 to-transparent"></div>
+</div>
+<div class="p-5">
+<div class="flex flex-wrap gap-2 mb-3">
+<span class="text-[9px] code-text bg-amber-950 text-amber-500 px-2 py-0.5 rounded border border-amber-500/20">DSA</span>
+<span class="text-[9px] code-text bg-amber-950 text-amber-500 px-2 py-0.5 rounded border border-amber-500/20">LPU</span>
+</div>
+<h4 class="text-white font-bold mb-1">Data Structures and Algorithm</h4>
+<p class="text-xs text-charcoal-400 mb-4">LPU / iamneo</p>
+<a class="inline-flex items-center gap-2 px-4 py-2 rounded border border-amber-500/40 bg-amber-900/10 text-amber-500 text-[10px] code-text uppercase tracking-wider transition-all duration-300 ease-out hover:bg-amber-500 hover:text-charcoal-950 hover:shadow-[0_0_12px_#FFBF00]" href="https://lpucolab438.examly.io/certificate/U2FsdGVkX19UlhbkkN%2FMsu8%2B1i90dWqzw5H6T5a%2BSRo%3D">Verify Certificate <span class="material-symbols-outlined text-sm">open_in_new</span></a>
+</div>
+</div>
+
+</div>
+<div class="text-center pt-4">
+<a class="inline-block px-8 py-3 bg-charcoal-950 border border-charcoal-800 text-charcoal-300 rounded text-xs code-text hover:border-amber-500 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(255,191,0,0.5)] uppercase tracking-widest" href="certifications.html">[ VIEW_ALL_CERTIFICATIONS ]</a>
+</div>
+</section>
+
+<section class="grid lg:grid-cols-2 gap-6 pb-12" id="contact">
+<div class="bg-charcoal-950 rounded-lg panel-border p-8 flex flex-col justify-center">
+<div class="text-amber-500 text-xs code-text mb-2">> CONNECTION_ESTABLISHED</div>
+<h3 class="text-2xl font-bold text-white uppercase mb-6">Transmit_Inquiry</h3>
+<p class="text-charcoal-400 text-sm mb-8 leading-relaxed">
+                    Always operational for high-priority projects and technical collaborations. Ready to deploy expertise to your development pipeline.
+                </p>
+<div class="space-y-4">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-charcoal-900 border border-charcoal-800 flex items-center justify-center rounded">
+<span class="material-symbols-outlined text-amber-500 text-lg">mail</span>
+</div>
+<div>
+<p class="text-[10px] code-text text-charcoal-500">EMAIL_ID</p>
+<p class="text-sm font-bold text-white">shivenmishra0606@gmail.com</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-charcoal-900 border border-charcoal-800 flex items-center justify-center rounded">
+<span class="material-symbols-outlined text-amber-500 text-lg">call</span>
+</div>
+<div>
+<p class="text-[10px] code-text text-charcoal-500">SECURE_VOICE</p>
+<p class="text-sm font-bold text-white">+91-9415156079</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-charcoal-950 rounded-lg panel-border overflow-hidden">
+<div class="terminal-header">
+<div class="terminal-dot bg-red-500/50"></div>
+<div class="terminal-dot bg-amber-500/50"></div>
+<div class="terminal-dot bg-amber-500/50"></div>
+<span class="ml-auto text-[10px] code-text text-charcoal-500">v1.0.4-stable</span>
+</div>
+<form action="https://formspree.io/f/mwvryngk" method="POST" class="p-8 space-y-6">
+<div class="grid md:grid-cols-2 gap-6">
+<div>
+<label class="block text-[10px] code-text text-charcoal-500 uppercase mb-2">Subject_Name</label>
+<input name="name" required class="w-full bg-charcoal-900 border border-charcoal-800 rounded px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500 transition-colors" placeholder="Identification..." type="text"/>
+</div>
+<div>
+<label class="block text-[10px] code-text text-charcoal-500 uppercase mb-2">Return_Address</label>
+<input name="email" required class="w-full bg-charcoal-900 border border-charcoal-800 rounded px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500 transition-colors" placeholder="Email..." type="email"/>
+</div>
+</div>
+<div>
+<label class="block text-[10px] code-text text-charcoal-500 uppercase mb-2">Payload_Data</label>
+<textarea name="message" required class="w-full bg-charcoal-900 border border-charcoal-800 rounded px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500 transition-colors h-32" placeholder="Message content..."></textarea>
+</div>
+<button class="w-full bg-amber-600 hover:bg-amber-500 text-charcoal-950 font-bold py-4 rounded text-xs code-text transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(255,191,0,0.5)] tracking-[0.2em]" type="submit">
+                        [ SEND_PACKET ]
+                    </button>
+</form>
+</div>
+</section>
+<footer class="text-center py-6 border-t border-charcoal-800">
+<p class="text-[10px] code-text text-charcoal-600 uppercase tracking-widest">
+                © 2026 SM_SYSTEMS_GLOBAL // BUILT_WITH_PRECISION // ALL_RIGHTS_RESERVED
+            </p>
+</footer>
+</main>
+</div>
+<script>
+    (() => {
+        const navLinks = Array.from(document.querySelectorAll('aside nav a[href^="#"]'));
+        const sections = navLinks
+            .map((link) => document.querySelector(link.getAttribute('href')))
+            .filter(Boolean);
+
+        if (!navLinks.length || !sections.length) {
+            return;
+        }
+
+        const setActiveLink = (id) => {
+            navLinks.forEach((link) => {
+                const isActive = link.getAttribute('href') === `#${id}`;
+                link.classList.toggle('active', isActive);
+            });
+        };
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                const visibleEntries = entries
+                    .filter((entry) => entry.isIntersecting)
+                    .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+                if (visibleEntries.length) {
+                    setActiveLink(visibleEntries[0].target.id);
+                }
+            },
+            {
+                root: null,
+                rootMargin: '-25% 0px -45% 0px',
+                threshold: [0.15, 0.35, 0.55, 0.75],
+            }
+        );
+
+        sections.forEach((section) => observer.observe(section));
+
+        const initialSection = sections.find((section) => section.getBoundingClientRect().top >= 0) || sections[0];
+        setActiveLink(initialSection.id);
+    })();
+</script>
+</body></html>
